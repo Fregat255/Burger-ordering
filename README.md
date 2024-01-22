@@ -14,7 +14,7 @@ Before running the test, ensure you have the following installed:
 1. **Clone Repository:**
 
     ```bash
-    git clone https://github.com/your-username/wolt-big-tasty-test.git
+    git clone https://github.com/Fregat255/wolt-big-tasty-test.git
     ```
 
 2. **Navigate to Project Directory:**
