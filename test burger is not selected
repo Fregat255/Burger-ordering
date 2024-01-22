@@ -1,0 +1,24 @@
+describe('Ordering a Burger at McDonald\'s on Wolt.com', () => {
+    it('should handle the scenario when the burger is not selected', () => {
+
+        cy.visit('https://www.wolt.com');
+        
+        cy.get('[data-test-id="search-input"]').type('Kauno Dokas');
+
+        cy.get('[data-test-id="search-input"]').type('McDonald\'s').blur(); 
+
+        cy.get('[data-test-id="search-button"]').click();
+
+        cy.get('[data-test-id="restaurant-name"]').contains('McDonald\'s').should('be.visible').click();
+
+        cy.get('[data-test-id="error-message"]').should('not.exist');
+
+        cy.get('[data-test-id="cart item"]').should('not.exist');
+
+        cy.get('[data-test-id="proceed-to-checkout"]').should('be.visible').click();
+
+        cy.get('[data-test-id="error-message"]').should('be.visible').contains('Please select a burger');
+
+        cy.get('[data-test-id="search-input"]').clear();
+    });
+});
