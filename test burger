@@ -1,0 +1,29 @@
+describe('Ordering a Big Tasty burger at McDonald\'s on Wolt.com', () => {
+    it('should complete the ordering process', () => {
+
+        cy.visit('https://www.wolt.com');
+
+        cy.get('[data-test-id="search-input"]').type('Kauno Dokas');
+
+        cy.get('[data-test-id="search-button"]').click();
+
+        cy.get('[data-test-id="restaurant-name"]').contains('McDonald\'s').click();
+
+        cy.get('[data-test-id="menu item"]').contains('Big Tasty').click();
+
+        cy.get('[data-test-id="add to cart"]').click();
+
+        cy.get('[data-test-id="cart item"]').should('contain', 'Big Tasty');
+
+        cy.get('[data-test-id="cart-item-price"]').should('contain', '€6.05'); 
+
+        cy.get('[data-test-id="proceed-to-checkout"]').click();
+
+        cy.get('[data-test-id="delivery-method"]').select('Courier'); 
+
+        cy.get('[data-test-id="payment-method"]').select('Credit Card'); 
+
+        cy.get('[data-test-id="pay-now"]').click();
+
+    });
+});
