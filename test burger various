@@ -1,0 +1,34 @@
+describe('Exploring Burger Options on Wolt.com', () => {
+    it('should explore various burger and restaurant options', () => {
+
+        cy.visit('https://www.wolt.com');
+
+        cy.get('[data-test-id="search-input"]').type('Kauno Dokas');
+
+        cy.get('[data-test-id="search-input"]').type('Burger');
+
+        cy.get('[data-test-id="search-button"]').click();
+
+        cy.get('[data-test-id="restaurant-name"]').contains('McDonald\'s').should('exist');
+
+        cy.get('[data-test-id="menu item"]').contains('Big Tasty').should('exist');
+
+        cy.get('[data-test-id="restaurant-name"]').eq(0).click();
+
+        cy.get('[data-test-id="menu item"]').eq(0).click();
+
+        cy.get('[data-test-id="add to cart"]').click();
+
+        cy.get('[data-test-id="cart item"]').should('exist');
+
+        cy.get('[data-test-id="cart-item-price"]').should('exist');
+
+        cy.get('[data-test-id="proceed-to-checkout"]').click();
+
+        cy.get('[data-test-id="delivery-method"]').select('Courier');
+
+        cy.get('[data-test-id="payment-method"]').select('Credit Card');
+
+        cy.get('[data-test-id="pay-now"]').click();
+    });
+});
