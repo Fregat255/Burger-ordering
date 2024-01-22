@@ -1,0 +1,42 @@
+describe('Ordering a Burger at McDonald\'s on Wolt.com', () => {
+    it('should handle the scenario when the restaurant name is not displayed', () => {
+
+        cy.visit('https://www.wolt.com');
+        
+        cy.get('[data-test-id="search-input"]').type('Kauno Dokas');
+
+        cy.get('[data-test-id="search-input"]').type('McDonald\'s').blur(); 
+
+        cy.get('[data-test-id="search-button"]').click();
+
+        cy.get('[data-test-id="restaurant-name"]').should('not.exist');
+
+        cy.get('[data-test-id="error-message"]').should('be.visible').contains('Restaurant not found');
+
+        cy.get('[data-test-id="search-input"]').clear();
+
+        cy.get('[data-test-id="search-input"]').type('McDonald\'s').blur(); 
+
+        cy.get('[data-test-id="search-button"]').click();
+
+        cy.get('[data-test-id="restaurant-name"]').contains('McDonald\'s').click();
+
+        cy.get('[data-test-id="error-message"]').should('not.exist');
+
+        cy.get('[data-test-id="menu item"]').contains('Big Tasty').click();
+
+        cy.get('[data-test-id="add to cart"]').click();
+
+        cy.get('[data-test-id="cart item"]').should('contain', 'Big Tasty');
+
+        cy.get('[data-test-id="proceed-to-checkout"]').click();
+
+        cy.get('[data-test-id="delivery-method"]').select('Courier');
+
+        cy.get('[data-test-id="payment-method"]').select('Credit Card');
+
+        cy.get('[data-test-id="pay-now"]').click();
+
+        cy.get('[data-test-id="error-message"]').should('not.exist');
+    });
+});
